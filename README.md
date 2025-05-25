@@ -22,13 +22,13 @@ Technology Detector - Identify web technologies, frameworks, and CMS platforms
 Prerequisites
 bashpip install whois dnspython requests
 Clone and Run
-bashgit clone https://github.com/yourusername/reda-toolkit.git
+bashgit clone https://github.com/deanbilledo/tool-kit-reigh.git
 cd reda-toolkit
 python reda.py
 📖 Usage
 Basic Usage
 Simply run the script and follow the interactive menu:
-bashpython reda.py
+bashpython launch.py
 Module Examples
 1. WHOIS Lookup
 Enter domain: example.com
