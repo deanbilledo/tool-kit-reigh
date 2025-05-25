@@ -9,5 +9,6 @@ def run_in_new_terminal(script_path):
 
 if __name__ == "__main__":
     # Change this path to your actual main.py path
-    main_script = r"C:\Users\deanr\OneDrive\Documents\GitHub\tool-kit-reigh\main.py"
+    #put your main.py path here dont use mine use yours
+    main_script = r"C:\Users\deanr\OneDrive\Documents\GitHub\tool-kit-reigh\tool-kit-reigh\main.py"
     run_in_new_terminal(main_script)
