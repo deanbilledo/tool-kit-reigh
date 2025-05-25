@@ -12,6 +12,42 @@ DNS Lookup - Comprehensive DNS record analysis (A, CNAME, MX records)
 IP Geolocation - Geographic location and ISP information for IP addresses
 Port Scanner - Scan for open ports and identify running services
 
+🚀 Installation
+
+Method 1: Using requirements.txt (Recommended)
+bash# Clone the repository
+git clone https://github.com/deanbilledo/tool-kit-reigh.git 
+cd tool-kit-reigh
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the toolkit
+python main.py
+or 
+python launch.py
+
+Method 2: Manual Installation
+bash# Install dependencies manually
+pip install python-whois==0.8.0
+pip install dnspython==2.4.2
+pip install requests==2.31.0
+
+# Run the toolkit
+python launch.py
+
+Python 3.6+ (Python 3.8+ recommended)
+Operating System: Windows, macOS, Linux
+Internet Connection: Required for most modules
+Terminal/Command Prompt: For optimal display
+
+📖 Usage
+Basic Usage
+Simply run the script and follow the interactive menu:
+bashpython launch.py
+or 
+bashpython main.py
+
 Web Application Analysis
 
 Subdomain Finder - Discover subdomains using wordlist enumeration
