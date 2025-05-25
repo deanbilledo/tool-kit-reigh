@@ -34,7 +34,7 @@ def banner():
     print(f"{Colors.CYAN}║{Colors.BLUE}{Colors.BOLD}{'    ██   ██   ██        ██     ██  ██    ██  ':^78}{Colors.CYAN}║{Colors.END}")
     print(f"{Colors.CYAN}║{Colors.GREEN}{Colors.BOLD}{'    ██    ██  ████████  ████████   ██    ██  ':^78}{Colors.CYAN}║{Colors.END}")
     print(f"{Colors.CYAN}║{' ' * 78}║{Colors.END}")
-    print(f"{Colors.CYAN}║{Colors.YELLOW}{Colors.BOLD}{'The Ultimate Information Gathering Tool':^78}{Colors.CYAN}║{Colors.END}")
+    print(f"{Colors.CYAN}║{Colors.YELLOW}{Colors.BOLD}{'An Information Gathering Tool':^78}{Colors.CYAN}║{Colors.END}")
     print(f"{Colors.CYAN}║{' ' * 78}║{Colors.END}")
     print(f"{Colors.CYAN}║{Colors.GREEN}{'                 Version: '}{Colors.YELLOW}1.0    "
           f"{Colors.GREEN}Modules: {Colors.YELLOW}7    "
