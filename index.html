@@ -28,7 +28,93 @@
     <link rel="icon" type="image/svg+xml" href="./assets/icons/favicon.svg">
     
     <!-- External Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.3/qrcode.min.js"></script>
+    <!-- QR Code library with immediate setup -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+    <script>
+        // Setup QRCode interface immediately after library load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof qrcode !== 'undefined') {
+                // Primary implementation using qrcode-generator library
+                window.QRCode = {
+                    toCanvas: (canvas, text, options, callback) => {
+                        try {
+                            const errorLevel = options.errorCorrectionLevel || 'M';
+                            const qr = qrcode(0, errorLevel);
+                            qr.addData(text);
+                            qr.make();
+                            
+                            const size = options.width || 256;
+                            const moduleCount = qr.getModuleCount();
+                            const cellSize = Math.floor(size / moduleCount);
+                            const margin = options.margin || 4;
+                            
+                            canvas.width = size;
+                            canvas.height = size;
+                            
+                            const ctx = canvas.getContext('2d');
+                            ctx.fillStyle = options.color?.light || '#ffffff';
+                            ctx.fillRect(0, 0, size, size);
+                            
+                            ctx.fillStyle = options.color?.dark || '#000000';
+                            
+                            for (let row = 0; row < moduleCount; row++) {
+                                for (let col = 0; col < moduleCount; col++) {
+                                    if (qr.isDark(row, col)) {
+                                        ctx.fillRect(
+                                            margin + col * cellSize,
+                                            margin + row * cellSize,
+                                            cellSize,
+                                            cellSize
+                                        );
+                                    }
+                                }
+                            }
+                            
+                            console.log('✅ Valid QR code generated with qrcode-generator');
+                            if (callback) callback(null);
+                        } catch (error) {
+                            console.error('QR generation error:', error);
+                            if (callback) callback(error);
+                        }
+                    },
+                    toString: (text, options, callback) => {
+                        try {
+                            const errorLevel = options.errorCorrectionLevel || 'M';
+                            const qr = qrcode(0, errorLevel);
+                            qr.addData(text);
+                            qr.make();
+                            
+                            const size = options.width || 256;
+                            const moduleCount = qr.getModuleCount();
+                            const cellSize = Math.floor(size / moduleCount);
+                            const dark = options.color?.dark || '#000000';
+                            const light = options.color?.light || '#ffffff';
+                            const margin = options.margin || 4;
+                            
+                            let svg = `<svg width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">`;
+                            svg += `<rect width="${size}" height="${size}" fill="${light}"/>`;
+                            
+                            for (let row = 0; row < moduleCount; row++) {
+                                for (let col = 0; col < moduleCount; col++) {
+                                    if (qr.isDark(row, col)) {
+                                        svg += `<rect x="${margin + col * cellSize}" y="${margin + row * cellSize}" width="${cellSize}" height="${cellSize}" fill="${dark}"/>`;
+                                    }
+                                }
+                            }
+                            
+                            svg += '</svg>';
+                            if (callback) callback(null, svg);
+                        } catch (error) {
+                            if (callback) callback(error);
+                        }
+                    }
+                };
+                console.log('🔄 QRCode interface ready with qrcode-generator library');
+            } else {
+                console.warn('⚠️ qrcode-generator library not loaded, using fallback');
+            }
+        });
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.2/marked.min.js" defer></script>
@@ -163,6 +249,37 @@
     <script src="./assets/js/utils/theme.js"></script>
     <script src="./assets/js/utils/notifications.js"></script>
     <script src="./assets/js/utils/modal.js"></script>
+    <script src="./assets/js/utils/qr-fallback.js"></script>
+    <script>
+        // Debug: Check QR implementations
+        window.addEventListener('DOMContentLoaded', () => {
+            console.log('=== QR Implementation Status (DOMContentLoaded) ===');
+            console.log('qrcode library available:', typeof qrcode !== 'undefined');
+            console.log('QRCode interface available:', typeof QRCode !== 'undefined');
+            
+            // Wait a bit then check again
+            setTimeout(() => {
+                console.log('=== QR Implementation Status (After Timeout) ===');
+                console.log('qrcode library available:', typeof qrcode !== 'undefined');
+                console.log('QRCode interface available:', typeof QRCode !== 'undefined');
+                
+                if (typeof QRCode !== 'undefined') {
+                    console.log('QRCode methods:', Object.getOwnPropertyNames(QRCode));
+                    // Test QR generation
+                    const testCanvas = document.createElement('canvas');
+                    QRCode.toCanvas(testCanvas, 'test', {width: 100}, (error) => {
+                        if (error) {
+                            console.error('❌ QR test failed:', error);
+                        } else {
+                            console.log('✅ QR generation test successful');
+                        }
+                    });
+                } else {
+                    console.warn('⚠️ QRCode interface still not available');
+                }
+            }, 1500);
+        });
+    </script>
     <script src="./assets/js/tools/qr-generator.js"></script>
     <script src="./assets/js/tools/background-remover.js"></script>
     <script src="./assets/js/tools/pdf-converter.js"></script>

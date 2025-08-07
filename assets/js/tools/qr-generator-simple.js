@@ -148,32 +148,7 @@ class QRGenerator {
     init() {
         this.setupEventListeners();
         this.setupPresets();
-        
-        // Wait for QRCode to be available
-        this.waitForQRCode().then(() => {
-            console.log('📱 QR Generator tool initialized successfully');
-        }).catch(error => {
-            console.error('QR Generator initialization failed:', error);
-        });
-    }
-
-    /**
-     * Wait for QRCode library to be available
-     */
-    async waitForQRCode() {
-        const maxWait = 5000; // 5 seconds
-        const checkInterval = 100; // 100ms
-        const maxAttempts = maxWait / checkInterval;
-        
-        for (let attempt = 0; attempt < maxAttempts; attempt++) {
-            if (typeof QRCode !== 'undefined') {
-                console.log(`QRCode available after ${attempt * checkInterval}ms`);
-                return true;
-            }
-            await new Promise(resolve => setTimeout(resolve, checkInterval));
-        }
-        
-        throw new Error('QRCode library not available after 5 seconds');
+        console.log('📱 QR Generator tool initialized with built-in implementation');
     }
 
     /**
@@ -323,16 +298,10 @@ class QRGenerator {
      * Create QR code
      */
     async createQRCode(text, settings) {
-        return new Promise(async (resolve, reject) => {
-            // Wait for QRCode to be available if it's not ready yet
+        return new Promise((resolve, reject) => {
             if (typeof QRCode === 'undefined') {
-                console.log('QRCode not ready, waiting...');
-                try {
-                    await this.waitForQRCode();
-                } catch (error) {
-                    reject(new Error('QR Code library not available. Please refresh the page and try again.'));
-                    return;
-                }
+                reject(new Error('QR Code generator not available'));
+                return;
             }
 
             const preview = document.getElementById('qr-preview');
@@ -344,29 +313,23 @@ class QRGenerator {
             preview.innerHTML = '<canvas id="qr-canvas"></canvas>';
             const canvas = document.getElementById('qr-canvas');
 
-            try {
-                QRCode.toCanvas(canvas, text, {
-                    width: settings.size,
-                    height: settings.size,
-                    errorCorrectionLevel: settings.errorCorrectionLevel,
-                    color: {
-                        dark: settings.foreground,
-                        light: settings.background
-                    },
-                    margin: 2
-                }, (error) => {
-                    if (error) {
-                        console.error('QR generation error:', error);
-                        reject(new Error(`Failed to generate QR code: ${error.message || error}`));
-                    } else {
-                        this.currentQRData = { text, settings, canvas };
-                        resolve();
-                    }
-                });
-            } catch (error) {
-                console.error('QR creation error:', error);
-                reject(new Error(`QR code creation failed: ${error.message || error}`));
-            }
+            QRCode.toCanvas(canvas, text, {
+                width: settings.size,
+                height: settings.size,
+                errorCorrectionLevel: settings.errorCorrectionLevel,
+                color: {
+                    dark: settings.foreground,
+                    light: settings.background
+                },
+                margin: 2
+            }, (error) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    this.currentQRData = { text, settings, canvas };
+                    resolve();
+                }
+            });
         });
     }
 
@@ -395,13 +358,7 @@ class QRGenerator {
         document.getElementById('qr-stat-error').textContent = settings.errorCorrectionLevel;
         document.getElementById('qr-actions').style.display = 'block';
         
-        // Check if we're using a real QR implementation
-        const isRealQR = typeof QRCodeLib !== 'undefined';
-        const message = isRealQR ? 
-            'Valid QR code generated! Ready to scan.' : 
-            'QR code generated (preview mode - may not be scannable)';
-        
-        NotificationManager.success('QR Code Generated!', message);
+        NotificationManager.success('QR Code Generated!', 'Your QR code is ready for download');
     }
 
     /**
