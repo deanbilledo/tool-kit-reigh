@@ -1,0 +1,56 @@
+{
+  "name": "toolkit-pro",
+  "version": "1.0.0",
+  "description": "Professional Web Development Tools - A comprehensive collection of web-based tools built with vanilla JavaScript",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "dev": "live-server --port=8000 --entry-file=index.html",
+    "build": "echo 'Building for production...' && npm run optimize",
+    "optimize": "echo 'Optimization would run here (minification, etc.)'",
+    "test": "echo 'Tests would run here'",
+    "lint": "echo 'Linting would run here'",
+    "format": "echo 'Formatting would run here'",
+    "analyze": "echo 'Bundle analysis would run here'",
+    "lighthouse": "lighthouse http://localhost:8000 --output=html --output-path=./lighthouse-report.html",
+    "accessibility": "pa11y http://localhost:8000",
+    "deploy": "echo 'Deployment to GitHub Pages would run here'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deanbilledo/tool-kit-reigh.git"
+  },
+  "keywords": [
+    "javascript",
+    "vanilla-js",
+    "web-tools",
+    "frontend",
+    "portfolio",
+    "pwa",
+    "accessibility",
+    "responsive",
+    "qr-generator",
+    "password-generator",
+    "developer-tools"
+  ],
+  "author": "Dean Billedo <dean.billedo@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/deanbilledo/tool-kit-reigh/issues"
+  },
+  "homepage": "https://deanbilledo.github.io/tool-kit-reigh",
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "lighthouse": "^11.3.0",
+    "pa11y": "^7.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
+}
