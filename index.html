@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional multi-tool web application - QR Generator, Background Remover, PDF Converter, and more developer tools">
+    <meta name="keywords" content="web tools, qr generator, pdf converter, background remover, developer tools">
+    <meta name="author" content="Dean Billedo">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="ToolKit Pro - Professional Web Development Tools">
+    <meta property="og:description" content="Comprehensive collection of professional web tools built with vanilla JavaScript">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://deanbilledo.github.io/tool-kit-reigh">
+    
+    <title>ToolKit Pro - Professional Web Development Tools</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="./assets/css/styles.css" as="style">
+    <link rel="preload" href="./assets/js/app.js" as="script">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/themes.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="./assets/icons/favicon.svg">
+    
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.3/qrcode.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.2/marked.min.js" defer></script>
+</head>
+<body>
+    <!-- Skip Navigation for Accessibility -->
+    <a href="#main-content" class="skip-nav">Skip to main content</a>
+    
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>ToolKit Pro</h1>
+                    <span class="tagline">Professional Web Development Tools</span>
+                </div>
+                
+                <nav class="nav" role="navigation" aria-label="Main navigation">
+                    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                        <span class="hamburger"></span>
+                    </button>
+                    
+                    <ul class="nav-list" role="list">
+                        <li><a href="#tools" aria-label="Browse available tools">Tools</a></li>
+                        <li><a href="#about" aria-label="About this project">About</a></li>
+                        <li><a href="#contact" aria-label="Contact information">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-controls">
+                    <button class="theme-toggle" aria-label="Toggle dark/light mode" title="Switch theme">
+                        <span class="theme-icon light-icon" aria-hidden="true">☀️</span>
+                        <span class="theme-icon dark-icon" aria-hidden="true">🌙</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main id="main-content" class="main" role="main">
+        <!-- Hero Section -->
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="container">
+                <div class="hero-content">
+                    <h2 id="hero-title" class="hero-title">Professional Development Tools</h2>
+                    <p class="hero-description">
+                        A comprehensive collection of web-based tools built with vanilla JavaScript, 
+                        showcasing modern frontend development practices and clean code architecture.
+                    </p>
+                    <a href="#tools" class="cta-button" aria-label="Explore available tools">
+                        Explore Tools
+                        <span aria-hidden="true">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Tools Grid -->
+        <section id="tools" class="tools-section" aria-labelledby="tools-title">
+            <div class="container">
+                <h2 id="tools-title" class="section-title">Available Tools</h2>
+                <div class="tools-grid" role="grid" aria-label="Collection of web development tools">
+                    <!-- Tool cards will be dynamically generated -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- Tool Modal -->
+        <div id="tool-modal" class="modal" role="dialog" aria-hidden="true" aria-labelledby="modal-title">
+            <div class="modal-backdrop" aria-hidden="true"></div>
+            <div class="modal-container">
+                <div class="modal-header">
+                    <h3 id="modal-title" class="modal-title"></h3>
+                    <button class="modal-close" aria-label="Close tool modal" title="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="tool-content" class="tool-content">
+                        <!-- Tool-specific content will be loaded here -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="tool-actions">
+                        <!-- Tool-specific actions will be added here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p>&copy; 2025 Dean Billedo. Built with vanilla JavaScript.</p>
+                    <p>
+                        <a href="https://github.com/deanbilledo/tool-kit-reigh" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           aria-label="View source code on GitHub">
+                            View Source Code
+                        </a>
+                    </p>
+                </div>
+                <div class="footer-tech">
+                    <span class="tech-badge">HTML5</span>
+                    <span class="tech-badge">CSS3</span>
+                    <span class="tech-badge">Vanilla JS</span>
+                    <span class="tech-badge">Canvas API</span>
+                    <span class="tech-badge">Web Crypto</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true">
+        <!-- Toast notifications will be dynamically added here -->
+    </div>
+    
+    <!-- Loading Spinner -->
+    <div id="loading-spinner" class="loading-spinner" aria-hidden="true">
+        <div class="spinner"></div>
+        <span class="loading-text">Processing...</span>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="./assets/js/utils/storage.js"></script>
+    <script src="./assets/js/utils/theme.js"></script>
+    <script src="./assets/js/utils/notifications.js"></script>
+    <script src="./assets/js/utils/modal.js"></script>
+    <script src="./assets/js/tools/qr-generator.js"></script>
+    <script src="./assets/js/tools/background-remover.js"></script>
+    <script src="./assets/js/tools/pdf-converter.js"></script>
+    <script src="./assets/js/tools/text-diff.js"></script>
+    <script src="./assets/js/tools/lorem-generator.js"></script>
+    <script src="./assets/js/tools/image-converter.js"></script>
+    <script src="./assets/js/tools/password-generator.js"></script>
+    <script src="./assets/js/tools/color-palette.js"></script>
+    <script src="./assets/js/tools/markdown-converter.js"></script>
+    <script src="./assets/js/tools/json-formatter.js"></script>
+    <script src="./assets/js/tools/url-shortener.js"></script>
+    <script src="./assets/js/tools/base64-converter.js"></script>
+    <script src="./assets/js/tools/image-optimizer.js"></script>
+    <script src="./assets/js/tools/hash-generator.js"></script>
+    <script src="./assets/js/app.js"></script>
+</body>
+</html>
